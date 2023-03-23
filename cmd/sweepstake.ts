@@ -49,10 +49,8 @@ function readProfileCsv(filePath: string): Profile[] {
 async function main() {
   const [filePath] = process.argv.slice(2)
   if (!filePath) {
-    console.info(
-      'Usage: yarn run --silent sweepstake [filePath] [conference] [env]\n\n',
-    )
-    throw new Error('Filepath, conference and target env is required.')
+    console.info('Usage: yarn run --silent sweepstake [filePath]\n\n')
+    throw new Error('Filepath is required.')
   }
   let profiles = readProfileCsv(filePath).filter((i) => i.ticket > 0)
 
