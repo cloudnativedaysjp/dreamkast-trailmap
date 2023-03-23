@@ -1,7 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { parse } from 'csv-parse/sync'
 
-const NUM_WINNERS = 100
 const IGNORE_USERS = './data/ignoreUsers.txt'
 const OUTPUT_FILE = './data/winners.json'
 
@@ -47,15 +46,22 @@ function readProfileCsv(filePath: string): Profile[] {
 }
 
 async function main() {
-  const [filePath] = process.argv.slice(2)
+  const [filePath, numWinners] = process.argv.slice(2)
   if (!filePath) {
-    console.info('Usage: yarn run --silent sweepstakes [filePath]\n\n')
-    throw new Error('Filepath is required.')
+    console.info(
+      'Usage: yarn run --silent sweepstakes [filePath] [numOfWinners]\n\n',
+    )
+    throw new Error('filepath is required.')
   }
   let profiles = readProfileCsv(filePath).filter((i) => i.ticket > 0)
 
+  const n = parseInt(numWinners)
+  if (isNaN(n)) {
+    throw new Error('numOfWinners is not a number.')
+  }
+
   const winners: Profile[] = []
-  for (let i = 0; i < NUM_WINNERS; i++) {
+  for (let i = 0; i < n; i++) {
     const candidates: Profile[] = []
     profiles.forEach((p) => {
       for (let j = 0; j < p.ticket; j++) {
