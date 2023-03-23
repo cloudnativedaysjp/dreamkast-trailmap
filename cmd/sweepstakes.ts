@@ -31,11 +31,11 @@ function readProfileCsv(filePath: string): Profile[] {
     throw new Error('missing required fields')
   }
 
-  const staffMembers = readFile(IGNORE_USERS)?.split('\n')
-  if (!staffMembers) {
+  const ignoreUsres = readFile(IGNORE_USERS)?.split('\n')
+  if (!ignoreUsres) {
     return profiles
   }
-  profiles = profiles.filter((p) => !staffMembers.includes(p.email))
+  profiles = profiles.filter((p) => !ignoreUsres.includes(p.email))
 
   const prevResult = readFile(OUTPUT_FILE)
   if (!prevResult) {
@@ -49,7 +49,7 @@ function readProfileCsv(filePath: string): Profile[] {
 async function main() {
   const [filePath] = process.argv.slice(2)
   if (!filePath) {
-    console.info('Usage: yarn run --silent sweepstake [filePath]\n\n')
+    console.info('Usage: yarn run --silent sweepstakes [filePath]\n\n')
     throw new Error('Filepath is required.')
   }
   let profiles = readProfileCsv(filePath).filter((i) => i.ticket > 0)

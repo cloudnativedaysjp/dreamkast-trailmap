@@ -49,10 +49,10 @@ $ yarn run --silent get-total-points [上記csvへのパス] [カンファレン
 - 上記で取得した利用者獲得ポイント一覧を指定して、以下を実行してください。
 
 ```shell
-$ yarn run --silent sweepstake [上記で取得したポイント一覧]
+$ yarn run --silent sweepstakes [上記で取得したポイント一覧]
 ```
 
-- 抽選人数を変えたい場合は、sweepstake.tsの上部の定数を変更してください。
+- 抽選人数を変えたい場合は、[sweepstakes.ts](./cmd/sweepstakes.ts)の上部の定数を変更してください。
 
 ```typescript
 const NUM_WINNERS = 100
@@ -60,7 +60,7 @@ const IGNORE_USERS = './data/ignoreUsers.txt'
 const OUTPUT_FILE = './data/winners.json'
 ```
 
-- スタッフを抽選対象から除外したい場合は、sweepstake.tsの上部の定数で指定されたignore fileににユーザの名前を追加してください。
+- スタッフを抽選対象から除外したい場合は、[sweepstakes.ts](./cmd/sweepstakes.ts)の上部の定数で指定されたignore fileににユーザの名前を追加してください。
 
 ```shell
 $ cat data/ignoreUsers.txt 
