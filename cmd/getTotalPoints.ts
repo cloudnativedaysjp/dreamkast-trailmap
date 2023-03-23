@@ -132,7 +132,7 @@ async function main() {
   const [filePath, conference, env] = process.argv.slice(2)
   if (!filePath) {
     console.info(
-      'Usage: npm run --silent get-total-points [filePath] [conference] [env]\n\n',
+      'Usage: yarn run --silent get-total-points [filePath] [conference] [env]\n\n',
     )
     throw new Error('Filepath, conference and target env is required.')
   }

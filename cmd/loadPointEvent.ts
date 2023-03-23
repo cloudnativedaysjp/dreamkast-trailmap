@@ -62,7 +62,7 @@ function mkdir(dir: string) {
 async function main() {
   const [filePath, env, salt] = process.argv.slice(2)
   if (!filePath) {
-    console.info('Usage: npm run load-point-event [filePath] [env] [salt]\n\n')
+    console.info('Usage: yarn run load-point-event [filePath] [env] [salt]\n\n')
     throw new Error('Filepath and dynamoTableName are required.')
   }
   isEnvValid(env)
