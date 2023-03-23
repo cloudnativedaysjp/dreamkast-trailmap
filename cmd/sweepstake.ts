@@ -2,8 +2,8 @@ import { readFileSync, writeFileSync } from 'fs'
 import { parse } from 'csv-parse/sync'
 
 const NUM_WINNERS = 100
-const OUTPUT_FILE = './data/cicd2023_winners.json'
-const STAFF_FILE = './data/staff.csv'
+const IGNORE_USERS = './data/ignoreUsers.txt'
+const OUTPUT_FILE = './data/winners.json'
 
 type Profile = {
   id: number
@@ -31,7 +31,7 @@ function readProfileCsv(filePath: string): Profile[] {
     throw new Error('missing required fields')
   }
 
-  const staffMembers = readFile(STAFF_FILE)?.split('\n')
+  const staffMembers = readFile(IGNORE_USERS)?.split('\n')
   if (!staffMembers) {
     return profiles
   }
@@ -73,7 +73,7 @@ async function main() {
     .sort((a, b) => a.id - b.id)
     .map((p) => ({ id: p.id, email: p.email, point: p.point }))
 
-  console.info(JSON.stringify(winnersView))
+  console.info(JSON.stringify(winnersView, null, '  '))
   writeFileSync(OUTPUT_FILE, JSON.stringify(winnersView))
 }
 
